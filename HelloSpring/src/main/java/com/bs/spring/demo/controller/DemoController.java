@@ -270,7 +270,7 @@ public class DemoController {
 		}
 		
 		mv.addObject("demos", demos);
-		mv.setViewName("demo/demolist");
+		mv.setViewName("demo/demoList");
 		
 		return mv;
 	}
