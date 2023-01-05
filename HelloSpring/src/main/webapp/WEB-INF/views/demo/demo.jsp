@@ -109,6 +109,16 @@
 					<button type="button" class="btn btn-outline-primary col-sm-12" onclick="requestSend('demo/demo7.do')">ModelAndView 반환하기</button>
 				</div>
 			</div>
+			<div class="form-group row">
+				<div class = "col-sm-12">
+					<button type="button" class="btn btn-outline-primary col-sm-12" onclick="requestSend('demo/insertDemo.do')">InsertTest</button>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class = "col-sm-12">
+					<button type="button" class="btn btn-outline-primary col-sm-12" onclick="requestSend('demo/selectDemoList.do')">selectDemoList</button>
+				</div>
+			</div>
 		</form>
 	</div>
 </section>

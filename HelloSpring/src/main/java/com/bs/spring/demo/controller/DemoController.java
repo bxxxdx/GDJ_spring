@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -19,10 +20,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bs.spring.demo.model.service.DemoService;
 import com.bs.spring.demo.model.vo.Demo;
 
 @Controller
 public class DemoController {
+	
+	//setter 이용
+	@Autowired
+	private DemoService service;
+	
+	//생성자 이용
+	public DemoController(DemoService service) {
+		this.service = service;
+	}
+	
 	//클라이언트가 요청한 서비스를 실행해주는 기능
 	//클라이언트가 요청한 서비스 주소(URL)에 맞는 메소드를 구현
 	//메소드 구현할 때 서비스주소와 연결해주는 어노테이션을 선언
@@ -227,10 +239,41 @@ public class DemoController {
 	}
 	
 	
+	@RequestMapping("/demo/insertDemo.do")
+	public String insertDemo(Demo demo) {
+		int result = service.insertDemo(demo);
+		//spring에서 redirect 처리하기
+		return "redirect:/demo/demo.do";
+	}
 	
+//	@RequestMapping("/demo/selectDemoList.do")
+//	public List<Demo> selectDemoList(){
+//		List<Demo> demos = service.selectDemoList();
+//		
+//		if(demos!=null) {
+//			demos.stream().forEach(v->System.out.println(v));
+//		}else {
+//			System.out.println("망");
+//		}
+//		
+//		return demos;
+//	}
 	
-	
-	
+	@RequestMapping("/demo/selectDemoList.do")
+	public ModelAndView selectDemoList(ModelAndView mv){
+		List<Demo> demos = service.selectDemoList();
+		
+		if(demos!=null) {
+			demos.stream().forEach(v->System.out.println(v));
+		}else {
+			System.out.println("망");
+		}
+		
+		mv.addObject("demos", demos);
+		mv.setViewName("demo/demolist");
+		
+		return mv;
+	}
 	
 	
 	
