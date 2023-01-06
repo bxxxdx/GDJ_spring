@@ -18,7 +18,7 @@ public class BeanConfiguration {
 	@Bean
 	public Person getDongmin() {
 		Person p = new Person();
-		p.setName("이동민");
+		p.setName("이동민"); 
 		p.setAge(28);
 		p.setMyAnimal(cow());
 		return p;
