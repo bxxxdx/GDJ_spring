@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org/DTD config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+
+<configuration>
+	<typeAliases>
+		<typeAlias type ="com.bd.hellomvc.member.model.vo.Member" alias="member"/>
+		<typeAlias type ="com.bd.hellomvc.common.StringArrayTypeHandler" alias="strArrTypeHandler"/>
+	</typeAliases>
+	<!-- <typeAlias type ="com.web.board.model.vo.BoardComment" alias="boardComment"/>
+		<typeAlias type ="com.web.member.model.vo.Member" alias="member"/>
+		<typeAlias type ="com.web.notice.model.vo.Notice" alias="notice"/> -->
+</configuration>

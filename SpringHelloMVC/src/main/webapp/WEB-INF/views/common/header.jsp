@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HelloMVC JSTL.Ver</title>
+<title>HelloMVC Spring.Ver</title>
 <script src="${path}/resources/js/jquery-3.6.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/style.css">
 </head>
