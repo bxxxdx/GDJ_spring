@@ -75,9 +75,9 @@ public class HomeController {
 //		a.setGender("여");
 //		a.setWeight(180.5);
 //		System.out.println(a);
-		System.out.println(b);
-		System.out.println(p);
-		System.out.println(food);
+//		System.out.println(b);
+//		System.out.println(p);
+//		System.out.println(food);
 		
 		
 		//메인 화면을 출력해주는 mapping 메소드다.

@@ -12,7 +12,7 @@
 	<jsp:param name="title" value="MainPage"/>
 </jsp:include>
  <section>
- 	<h2>Hello Spring</h2>
+ 	<h2>Hello Spring${loginMember }</h2>
  	<img src="${path}/resources/images/logo-spring.png" id="center-image" alt="스프링로고">
  </section>
  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
