@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.1.xsd">
+	<!-- 
+		단방향 암호화처리를 하는 클래스를 bean 등록 
+		BCryptPasswordEncoder 클래스 이용 -> 얘도 마찬가지로 hash알고리즘을 이용해서 처리한다.
+		SHA512 방식에서는 암호화 된 비밀번호를 보고 기존 비밀번호를 유추할 수 있었다.
+		
+		BCrtpt 방식에서는 특정한 sort값을 줘서 예를들어 비밀번호가 똑같이 1234여도 AZOA 혹은 ZAOA 이런식으로 나온다.
+		이런 부분을 해결하기 위해 sort값을 해독해주는 match method 또한 제공한다.
+		결국 match method를 통해 같아 달라 정도까지 확인이 가능해진다.
+	-->
+	<bean id="bcryptPassword" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+
+</beans>

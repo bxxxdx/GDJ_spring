@@ -15,7 +15,7 @@
 <body>
 	<div id="container">
 		<header>
-			<h1>HelloMVC JSTL.Ver</h1>
+			<h1>HelloMVC Spring.Ver</h1>
 			<div class="login-container">
 				<%-- <%if(loginMember == null) {%> --%>
 				<c:if test="${empty loginMember}">

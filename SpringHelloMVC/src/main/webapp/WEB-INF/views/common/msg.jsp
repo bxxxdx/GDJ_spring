@@ -5,12 +5,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
-<%-- <%
-	String msg = (String)request.getAttribute("msg");
-	String loc = (String)request.getAttribute("loc");
-	String script = (String)request.getAttribute("script");
-%> --%>
-
 <html>
 <head>
 <meta charset="UTF-8">
@@ -18,11 +12,8 @@
 </head>
 <body>
 	<script>
-		<%-- alert('<%=msg%>'); --%>
 		alert('${msg}');
-		<%-- location.replace('<%=request.getContextPath()%><%=loc%>'); --%>
 		location.replace('${path}${loc}');
-		<%-- <%=script!=null?script:""%> --%>
 		${script}
 	</script>
 </body>
