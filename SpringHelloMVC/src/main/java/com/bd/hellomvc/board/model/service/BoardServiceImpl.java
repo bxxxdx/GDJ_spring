@@ -67,6 +67,11 @@ public class BoardServiceImpl implements BoardService {
 	public int deleteBoard(int boardNo) {
 		return dao.deleteBoard(session, boardNo);
 	}
+
+	@Override
+	public int deleteBoardComment(int boardCommentNo) {
+		return dao.deleteBoardComment(session, boardCommentNo);
+	}
 	
 	
 	

@@ -23,7 +23,7 @@ public interface BoardService {
 	
 	int deleteBoard(int boardNo);
 	
-	
+	int deleteBoardComment(int boardCommentNo);
 	
 	
 	

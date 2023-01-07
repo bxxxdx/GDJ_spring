@@ -27,7 +27,7 @@ public interface BoardDao {
 	
 	int deleteBoard(SqlSessionTemplate session, int boardNo);
 	
-	
+	int deleteBoardComment(SqlSessionTemplate session, int boardCommentNo);
 	
 	
 }

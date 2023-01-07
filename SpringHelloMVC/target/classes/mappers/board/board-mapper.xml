@@ -103,5 +103,9 @@
   		DELETE FROM BOARD WHERE BOARD_NO=${boardNo}
   	</delete>
   	
+  	<delete id="deleteBoardComment" parameterType="_int">
+  		DELETE FROM BOARD_COMMENT WHERE BOARD_COMMENT_NO = #{boardCommentNo}
+  	</delete>
+  	
   	<!-- <![CDATA[ ]]> -->
 </mapper>

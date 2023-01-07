@@ -117,7 +117,7 @@
 								<td>
 									<button class="btn-reply" value="${boardComment.boardCommentNo}">답글</button>
 									<c:if test="${loginMember.userId==boardComment.boardCommentWriter or loginMember.userId=='admin'}">
-										<button class="btn-delete">삭제</button>
+										<button class="btn-delete" value="${boardComment.boardCommentNo}">삭제</button>
 									</c:if>
 								</td>
 							</c:if>
@@ -173,6 +173,10 @@
 			tr.find("td").css("display","none");
 			tr.insertAfter($(e.target).parents("tr")).children("td").slideDown(800);
 			$(e.target).off("click");
+		});
+		
+		$(".btn-delete").click(e=>{
+			location.replace("${path}/board/deleteBoardComment.do?boardCommentNo="+$(e.target).val()+"&boardNo="+${board.boardNo});
 		})
 		
 	})

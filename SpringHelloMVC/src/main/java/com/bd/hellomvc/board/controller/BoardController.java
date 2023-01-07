@@ -204,7 +204,23 @@ public class BoardController {
 	}
 	
 	
-	
+	@RequestMapping("/board/deleteBoardComment.do")
+	public ModelAndView deleteBoardComment(ModelAndView mv, int boardNo, int boardCommentNo) {
+		
+		int result = service.deleteBoardComment(boardCommentNo);
+		
+		String msg = "";
+		String loc = "";
+		if(result > 0) {
+			mv.addObject("msg","댓글 삭제 성공!!");
+		} else {
+			mv.addObject("msg","댓글 삭제 실패!!");
+		}
+		mv.addObject("loc","/board/readBoard.do?boardNo="+boardNo);
+		mv.setViewName("common/msg");
+		
+		return mv;
+	}
 	
 	
 	
