@@ -18,7 +18,8 @@
 </style>
 <section>
     <div id="notice-container">
-    <form action="${path}/notice/updateNoticeEnd.do" method="post" onsubmit="return noticeCheck();" enctype="multipart/form-data">
+    <%-- <form action="${path}/notice/updateNoticeEnd.do" method="post" onsubmit="return noticeCheck();" enctype="multipart/form-data"> --%>
+    <form action="${path}/notice/updateNoticeEnd.do" method="post" onsubmit="return noticeCheck();">    
         <table id="tbl-notice">
         <tr>
             <th>제 목</th>

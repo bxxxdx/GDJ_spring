@@ -1,6 +1,7 @@
 package com.bd.hellomvc.notice.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -83,17 +84,76 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/notice/writeNoticeEnd.do")
-	public ModelAndView writeNoticeEnd(ModelAndView mv){
+	public ModelAndView writeNoticeEnd(ModelAndView mv, 
+				@RequestParam Map param){
+		
+		//System.out.println(param);
+		int result = service.insertNotice(param);
+		
+		String msg = "";
+		String loc = "";
+		if(result > 0) {
+			mv.addObject("msg","공지사항 등록 성공!!");
+			mv.addObject("loc","/notice/noticeList.do");
+		} else {
+			mv.addObject("msg","공지사항 등록 실패!!");
+			mv.addObject("loc","/notice/writeNotice.do");
+		}
+		mv.setViewName("common/msg");
 		
 		return mv;
 	}
 	
+	@RequestMapping("/notice/updateNotice.do")
+	public ModelAndView updateNotice(ModelAndView mv, int noticeNo) {
+		
+		Notice n = service.searchNoticeNo(noticeNo);
+		
+		mv.addObject("notice", n);
+		mv.setViewName("notice/updateNotice");
+		
+		return mv;
+	}
 	
+	@RequestMapping("/notice/updateNoticeEnd.do")
+	public ModelAndView updateNoticeEnd(ModelAndView mv, @RequestParam Map param) {
+		//System.out.println(param);
+		
+		int result = service.updateNotice(param);
+		
+		String msg = "";
+		String loc = "";
+		if(result > 0) {
+			mv.addObject("msg","공지사항 수정 성공!!");
+			mv.addObject("loc","/notice/noticeList.do");
+		} else {
+			mv.addObject("msg","공지사항 수정 실패!!");
+			mv.addObject("loc","/notice/updateNotice.do?noticeNo="+param.get("noticeNo"));
+		}
+		mv.setViewName("common/msg");
+		
+		return mv;
+	}
 	
-	
-	
-	
-	
+	@RequestMapping("/notice/deleteNotice.do")
+	public ModelAndView deleteNotice(ModelAndView mv, int noticeNo) {
+		// 파일삭제부분 일단 생략 2023-01-07
+		
+		int result = service.deleteNotice(noticeNo);
+		
+		String msg = "";
+		String loc = "";
+		if(result > 0) {
+			mv.addObject("msg","공지사항 삭제 성공!!");
+			mv.addObject("loc","/notice/noticeList.do");
+		} else {
+			mv.addObject("msg","공지사항 삭제 실패!!");
+			mv.addObject("loc","/notice/updateNotice.do?noticeNo="+noticeNo);
+		}
+		mv.setViewName("common/msg");
+		
+		return mv;
+	}
 	
 	
 	

@@ -16,7 +16,7 @@
 	<!-- <![CDATA[ ]]> -->
 	<select id="searchNoticeAll" resultMap="noticeMap">
 		<![CDATA[
-			SELECT * FROM NOTICE JOIN MEMBER ON USERID = NOTICE_WRITER
+			SELECT * FROM NOTICE JOIN MEMBER ON USERID = NOTICE_WRITER ORDER BY NOTICE_NO DESC
 		]]>
 	</select>
 	

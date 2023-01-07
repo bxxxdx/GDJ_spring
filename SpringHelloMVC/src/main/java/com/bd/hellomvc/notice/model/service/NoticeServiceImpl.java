@@ -1,6 +1,7 @@
 package com.bd.hellomvc.notice.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,21 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public Notice searchNoticeNo(int noticeNo) {
 		return dao.searchNoticeNo(session, noticeNo);
+	}
+
+	@Override
+	public int insertNotice(Map param) {
+		return dao.insertNotice(session, param);
+	}
+
+	@Override
+	public int updateNotice(Map param) {
+		return dao.updateNotice(session, param);
+	}
+
+	@Override
+	public int deleteNotice(int noticeNo) {
+		return dao.deleteNotice(session, noticeNo);
 	}
 	 
 	

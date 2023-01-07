@@ -1,6 +1,7 @@
 package com.bd.hellomvc.notice.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.bd.hellomvc.notice.model.vo.Notice;
 
@@ -12,8 +13,10 @@ public interface NoticeService {
 	
 	Notice searchNoticeNo(int noticeNo);
 	
+	int insertNotice(Map param);
 	
+	int updateNotice(Map param);
 	
-	
+	int deleteNotice(int noticeNo);
 	
 }

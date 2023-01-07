@@ -16,7 +16,8 @@
 
 <section id="notice-container">
     <h2>공지사항 작성</h2>
-    <form action="${path}/notice/writeNoticeEnd.do" method="post" onsubmit="return noticeCheck();" enctype="multipart/form-data">
+    <%-- <form action="${path}/notice/writeNoticeEnd.do" method="post" onsubmit="return noticeCheck();" enctype="multipart/form-data"> --%>
+    <form action="${path}/notice/writeNoticeEnd.do" method="post" onsubmit="return noticeCheck();" >    
         <table id="tbl-notice">
         <tr>
             <th>제 목</th>
