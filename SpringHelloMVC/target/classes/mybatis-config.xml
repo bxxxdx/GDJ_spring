@@ -12,8 +12,7 @@
 		<typeAlias type ="com.bd.hellomvc.member.model.vo.Member" alias="member"/>
 		<typeAlias type ="com.bd.hellomvc.common.StringArrayTypeHandler" alias="strArrTypeHandler"/>
 		<typeAlias type ="com.bd.hellomvc.notice.model.vo.Notice" alias="notice"/>
+		<typeAlias type ="com.bd.hellomvc.board.model.vo.Board" alias="board"/>
+		<typeAlias type ="com.bd.hellomvc.board.model.vo.BoardComment" alias="boardComment"/>
 	</typeAliases>
-	<!-- <typeAlias type ="com.web.board.model.vo.BoardComment" alias="boardComment"/>
-		<typeAlias type ="com.web.member.model.vo.Member" alias="member"/>
-		<typeAlias type ="com.web.notice.model.vo.Notice" alias="notice"/> -->
 </configuration>

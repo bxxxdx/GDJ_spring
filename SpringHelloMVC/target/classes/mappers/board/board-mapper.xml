@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="board">
+	<resultMap type="board" id="boardMap">
+  		<id property="boardNo" column="BOARD_NO"></id>
+  		<result property="boardTitle" column="BOARD_TITLE"/>
+  		<result property="boardContent" column="BOARD_CONTENT"/>
+  		<result property="boardOriginalFilename" column="BOARD_ORIGINAL_FILENAME"/>
+  		<result property="boardRenamedFilename" column="BOARD_RENAMED_FILENAME"/>
+  		<result property="boardDate" column="BOARD_DATE"/>
+  		<result property="boardReadcount" column="BOARD_READCOUNT"/>
+  		
+  		<!-- association -->
+  		<association property="member" resultMap="member.memberMap"/>
+  		
+  		<!-- collection -->
+  		<!-- <collection property="boardComments" resultMap="boardCommentMap"/> -->
+  		<collection property="boardComments" ofType="boardComment">
+  			<id property="boardCommentNo" column="BOARD_COMMENT_NO"/>
+	  		<result property="boardCommentLevel" column="BOARD_COMMENT_LEVEL"/>
+	  		<result property="boardCommentWriter" column="BOARD_COMMENT_WRITER"/>
+	  		<result property="boardCommentContent" column="BOARD_COMMENT_CONTENT"/>
+	  		<!-- <result property="boardRef" column="BOARD_REF"/> -->
+	  		<!-- <result property="boardCommentRef" column="BOARD_COMMENT_REF"/> -->
+	  		<result property="boardCommentDate" column="BOARD_COMMENT_DATE"/>
+  		</collection>
+  	</resultMap>
+  	
+  	<select id="searchBoardAll" resultMap="boardMap">
+  		<![CDATA[ 
+  			SELECT * FROM BOARD 
+  			JOIN MEMBER ON BOARD_WRITER = USERID 
+  			ORDER BY BOARD_NO DESC
+  		]]>
+  		<!-- JOIN BOARD_COMMENT ON BOARD_NO = BOARD_REF -->
+  	</select>
+  	
+  	<select id="selectBoardCount" resultType="_int">
+  		<![CDATA[ 
+  			SELECT COUNT(*) FROM BOARD
+  		]]>
+  	</select>
+  	
+  	<select id="searchBoardCommentCount" resultType="_int">
+  		SELECT COUNT(*) FROM BOARD_COMMENT WHERE BOARD_REF = #{boardNo}
+  	</select>
+  	
+  	<select id="searchBoardNo" parameterType="map" resultMap="boardMap"> 
+  		<choose>
+  		<when test="boardCommentCount != null and  boardCommentCount > 0">
+  			SELECT * FROM(
+			SELECT * FROM BOARD LEFT JOIN MEMBER ON BOARD_WRITER = USERID 
+            LEFT JOIN BOARD_COMMENT ON BOARD_NO = BOARD_REF 
+            WHERE BOARD_NO = #{boardNo})
+			START WITH BOARD_COMMENT_LEVEL = 1 
+			CONNECT BY PRIOR BOARD_COMMENT_NO = BOARD_COMMENT_REF
+  		</when>
+  		<otherwise>
+  			SELECT * FROM BOARD JOIN MEMBER ON BOARD_WRITER = USERID WHERE BOARD_NO=#{boardNo}
+  		</otherwise>
+  		</choose>
+  		
+  	</select>
+  	
+  	<update id="updateReadcount" parameterType="_int">
+  		<![CDATA[ 
+  			UPDATE BOARD 
+  			SET BOARD_READCOUNT = BOARD_READCOUNT+1 
+  			WHERE BOARD_NO = #{boardNo}
+  		]]>
+  	</update>
+  	
+  	<insert id="insertBoardComment" parameterType="map">
+  		INSERT INTO BOARD_COMMENT VALUES(
+  		SEQ_BOARD_COMMENT_NO.NEXTVAL,#{boardCommentLevel},#{boardCommentWriter},
+  		#{boardCommentContent},#{boardRef}
+ 		<choose>
+	 		<when test="boardCommentRef != null and boardCommentRef != 0">
+	 			,#{boardCommentRef}
+	 		</when>
+	 		<otherwise>
+	 			,NULL
+	 		</otherwise>
+  		</choose>
+  		,DEFAULT)
+  	</insert>
+  	
+  	<update id="updateBoard" parameterType="map">
+  		UPDATE BOARD SET 
+  		BOARD_TITLE=#{boardTitle}, BOARD_WRITER=#{boardWriter}, 
+  		BOARD_CONTENT=#{boardContent}, BOARD_DATE=DEFAULT 
+  		WHERE BOARD_NO = #{boardNo}	
+  	</update>
+  	
+  	<insert id="insertBoard" parameterType="map">
+  		INSERT INTO BOARD VALUES(
+  		SEQ_BOARD_NO.NEXTVAL, 
+  		#{boardTitle}, #{boardWriter}, #{boardContent}, #{oriName}, #{fileName}, 
+  		DEFAULT, DEFAULT)
+  	</insert>
+  	
+  	<delete id="deleteBoard" parameterType="_int">
+  		DELETE FROM BOARD WHERE BOARD_NO=${boardNo}
+  	</delete>
+  	
+  	<!-- <![CDATA[ ]]> -->
+</mapper>

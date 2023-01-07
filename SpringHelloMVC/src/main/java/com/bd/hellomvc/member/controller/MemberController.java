@@ -1,6 +1,8 @@
 package com.bd.hellomvc.member.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -66,10 +68,25 @@ public class MemberController {
 	}
 	
 	@RequestMapping("login.do")
-	public String login(Model model, Member m) {
+	public String login(Model model, Member m, String saveId, HttpServletResponse response) {
 		Member loginMember = service.searchMemberId(m.getUserId());
 		if(loginMember != null && passwordEncoder.matches(m.getPassword(), loginMember.getPassword())) {
 			model.addAttribute("loginMember",loginMember);
+			
+			if(saveId!=null) {
+				//아이디 저장 체크 했을때
+				Cookie c = new Cookie("saveId",loginMember.getUserId());
+				c.setMaxAge(60*60*24*7);
+				response.addCookie(c);
+			}else {
+				Cookie c = new Cookie("saveId","");
+				c.setMaxAge(0);
+				response.addCookie(c);
+			}
+		} else {
+			Cookie c = new Cookie("saveId","");
+			c.setMaxAge(0);
+			response.addCookie(c);
 		}
 		return "redirect:/";
 	}
