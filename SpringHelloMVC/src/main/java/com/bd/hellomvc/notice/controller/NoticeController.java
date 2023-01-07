@@ -128,7 +128,7 @@ public class NoticeController {
 			mv.addObject("loc","/notice/noticeList.do");
 		} else {
 			mv.addObject("msg","공지사항 수정 실패!!");
-			mv.addObject("loc","/notice/readNotice.do?noticeNo="+param.get("noticeNo"));
+			mv.addObject("loc","/notice/updateNotice.do?noticeNo="+param.get("noticeNo"));
 		}
 		mv.setViewName("common/msg");
 		
@@ -148,7 +148,7 @@ public class NoticeController {
 			mv.addObject("loc","/notice/noticeList.do");
 		} else {
 			mv.addObject("msg","공지사항 삭제 실패!!");
-			mv.addObject("loc","/notice/updateNotice.do?noticeNo="+noticeNo);
+			mv.addObject("loc","/notice/readNotice.do?noticeNo="+noticeNo);
 		}
 		mv.setViewName("common/msg");
 		
