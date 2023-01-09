@@ -12,10 +12,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bs.spring.member.model.service.MemberService;
 import com.bs.spring.member.model.vo.Member;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @SessionAttributes({"loginMember"})
 @RequestMapping("/member") //이 컨트롤러에 들어왔을 때 기본적으로 prefix로 /member/가 붙는다
+@Slf4j
 public class MemberController {
+	
+	//private final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	
 	
 	
 	private MemberService service;
@@ -71,6 +77,7 @@ public class MemberController {
 	
 	@RequestMapping("/enrollMemberEnd.do")
 	public ModelAndView enrollMemberEnd(ModelAndView mv, Member m) {
+		log.debug("파라미터로 전달된 member : {}", m);
 		
 		//password 암호화 처리하기
 		String encodePassword = passwordEncoder.encode(m.getPassword());
