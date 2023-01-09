@@ -56,10 +56,26 @@
 		<beans:property name="myAnimal" ref="alonge"/>
 	</beans:bean>
 	
+	<beans:bean id="logincheck" class="com.bs.spring.common.interceptor.LoginCheckInterceptor">
+	</beans:bean>
 	
 	
 	
-	
+	<!-- 인터셉터 등록하기 -->
+	<interceptors>
+		<interceptor>
+			<!-- 주소패턴으로 설정하는 값 filter, servlet url-pattern 선언한 것과 동일하게 작성 -->
+			<mapping path="/demo/*"/>
+			<!-- 특정 매핑 주소에 대해 예외처리를 할 수 있다. -->
+			<exclude-mapping path="/demo/demo.do"/>
+			<beans:bean class="com.bs.spring.common.interceptor.LoggerInterceptor"/>		
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/demo/selectDemoList.do"/>
+			<beans:ref bean="logincheck"/>	 
+		</interceptor>
+	</interceptors>
 	
 	
 	
