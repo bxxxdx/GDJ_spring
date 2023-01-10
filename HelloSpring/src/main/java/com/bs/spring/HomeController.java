@@ -101,17 +101,17 @@ public class HomeController {
 		// info를 설정하면 warn도 찍고 error도 찍는다
 		
 		
-		logger.debug("난 debug야 ㅋ");
+		//logger.debug("난 debug야 ㅋ");
 		
-		logger.info("난 info야 ㅎ");
+		//logger.info("난 info야 ㅎ");
 		
-		logger.warn("난 warn이야 ㅜ");
+		//logger.warn("난 warn이야 ㅜ");
 		
-		logger.error("난 error야 -_-");
+		//logger.error("난 error야 -_-");
 		
 		//logger로 다른타입의 값 출력하기
 		//logger.debug(food); // Error
-		logger.debug("foor {}", food);
+		//logger.debug("foor {}", food);
 		
 		
 		

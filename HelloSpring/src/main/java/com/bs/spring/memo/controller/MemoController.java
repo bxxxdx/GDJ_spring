@@ -53,7 +53,7 @@ public class MemoController {
 	@RequestMapping(value = "/insertMemo.do", method = {RequestMethod.POST})
 	public ModelAndView insertMemo(ModelAndView mv, Memo m) {
 		
-		log.debug("입력메모 : {}", m);
+		//log.debug("입력메모 : {}", m);
 		
 		int result = service.insertMemo(m);
 		
