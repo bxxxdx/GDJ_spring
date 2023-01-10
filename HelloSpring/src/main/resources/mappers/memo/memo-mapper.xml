@@ -10,5 +10,9 @@
   		INSERT INTO MEMO VALUES
   		(SEQ_MEMONO.NEXTVAL, #{memo}, #{password}, DEFAULT)
   	</insert>
+  	
+  	<select id="selectMemoListCount" resultType="_int">
+  		SELECT COUNT(*) FROM MEMO
+  	</select>
   
 </mapper>
