@@ -1,6 +1,7 @@
 package com.bs.spring.common.aop;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.Signature;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,6 +14,17 @@ public class LoggerAspect {
 	public void loggerBefore(JoinPoint jp) { //전이나 후에 실행할 메소드 선언
 		
 		log.debug("loggerAspect 실행함");
+		
+		//JoinPoint 객체 aop 설정에 의해 메소드가 실행될 때 정보를 확인할 수 있음!
+		//타겟 클래스와 메소드 확인하기.
+		Signature sig = jp.getSignature();
+		log.debug(sig.getDeclaringTypeName() + " : " + sig.getName());
+		log.debug("===================================================");
+	}
+	
+	public void loggerAfter(JoinPoint jp) {
+		
+		log.debug("loggerAfter 메소드 실행!");
 		
 	}
 	

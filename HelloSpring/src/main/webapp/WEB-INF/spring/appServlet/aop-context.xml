@@ -8,8 +8,9 @@
 	<!-- xml방식으로 aop 설정하기 -->
 	<aop:config>
 		<aop:aspect ref="loggerAspect">
-			<aop:pointcut expression="execution(* com.bs.spring.memo.model.dao..select*(..))" id="pt"/>
+			<aop:pointcut expression="execution(* com.bs.spring.memo..select*(..))" id="pt"/>
 			<aop:before method="loggerBefore" pointcut-ref="pt"/>
+			<aop:after method="loggerAfter" pointcut-ref="pt"/>
 		</aop:aspect>
 	</aop:config>
 	<bean id="loggerAspect" class="com.bs.spring.common.aop.LoggerAspect"/>

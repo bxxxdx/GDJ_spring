@@ -29,7 +29,7 @@ public class MemoController {
 	
 	//Get방식으로 보낼때만 받겠다, post방식은 받지 않겠다는 의미.
 	@RequestMapping(value = "/memo.do", method = {RequestMethod.GET})
-	public ModelAndView memoList(ModelAndView mv,
+	public ModelAndView selectMemoList(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1")int cPage,
 			@RequestParam(value="numPerpage", defaultValue="5")int numPerpage) {
 
