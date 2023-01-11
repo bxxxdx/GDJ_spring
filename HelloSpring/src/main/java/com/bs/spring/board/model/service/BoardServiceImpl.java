@@ -28,6 +28,16 @@ public class BoardServiceImpl implements BoardService {
 	public int selectBoardListCount() {
 		return dao.selectBoardListCount(session);
 	}
+
+	@Override
+	public int insertBoard(Board b) {
+		return dao.insertBoard(session, b);
+	}
+
+	@Override
+	public Board selectBoard(int boardNo) {
+		return dao.selectBoard(session, boardNo);
+	}
 	
 	
 	

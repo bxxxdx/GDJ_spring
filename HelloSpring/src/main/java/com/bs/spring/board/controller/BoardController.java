@@ -29,7 +29,7 @@ public class BoardController {
 	@RequestMapping("/board.do")
 	public ModelAndView board(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1")int cPage,
-			@RequestParam(value="numPerpage", defaultValue="10")int numPerpage) {
+			@RequestParam(value="numPerpage", defaultValue="5")int numPerpage) {
 		
 		List<Board> boards = service.selectBoardList(cPage, numPerpage);
 		mv.addObject("boards", boards);
@@ -42,11 +42,32 @@ public class BoardController {
 		return mv;
 	}
 	
+	@RequestMapping("/boardView.do")
+	public ModelAndView selectBoard(ModelAndView mv, int boardNo) {
+		
+		mv.addObject("board",service.selectBoard(boardNo));
+		mv.setViewName("board/boardView");
+		
+		log.debug("보두뷰 : {}",service.selectBoard(boardNo));
+		
+		return mv;
+	}
 	
+	@RequestMapping("/boardWrite.do")
+	public String boardWrite() {
+		return "board/boardWrite";
+	}
 	
-	
-	
-	
+	@RequestMapping("/insertBoard.do")
+	public ModelAndView insertBoard(ModelAndView mv,
+				@RequestParam(value="boardWriter")String boardWriter, Board b) {
+		log.debug(boardWriter);
+		log.debug("입력 board 값 : {}", b);
+		
+		
+		
+		return mv;
+	}
 	
 	
 	

@@ -6,7 +6,8 @@ import lombok.Data;
 @Data
 public class Attachment {
 	private int attachmentNo;
-	private int boardNo;
+	//private int boardNo;
+	private Board board;
 	private String originalFilename;
 	private String renamedFilename;
 	private Date uploadDate;

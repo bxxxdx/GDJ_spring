@@ -9,12 +9,11 @@
 		<result property="boardReadcount" column="BOARDREADCOUNT"/>
 		
 		<!-- association -->
-		<association property="member" resultMap="member.memberMap"/>
+		<association property="boardWriter" resultMap="member.memberMap"/>
 		
 		<!-- collection -->
-		<collection property="attachments" ofType="attachment">
+		<collection property="files" ofType="attachment">
 			<id property="attachmentNo" column="ATTACHMENTNO"/>
-			<result property="boardNo" column="BOARDNO_1"/>
 			<result property="originalFilename" column="ORIGINALFILENAME"/>
 			<result property="renamedFilename" column="RENAMEDFILENAME"/>
 			<result property="uploadDate" column="UPLOADDATE"/>
@@ -32,5 +31,16 @@
 	<select id="selectBoardListCount" resultType="_int">
 		SELECT COUNT(*) FROM BOARD
 	</select>
+	
+	<select id="selectBoard" resultMap="boardMap" parameterType="_int">
+		SELECT * FROM BOARD B
+		JOIN MEMBER M ON B.BOARDWRITER = M.USERID
+		LEFT JOIN ATTACHMENT A ON B.BOARDNO = A.BOARDNO
+		WHERE B.BOARDNO=${boardNo}
+	</select>
+	
+	<insert id="insertBoard" parameterType="board">
+		INSERT INTO BOARD VALUES(SEQ_BOARDNO.NEXTVAL, #{boardTitle}, #{boardWriter.userId}, #{boardContent}, DEFAULT, DEFAULT)
+	</insert>
 	
 </mapper>

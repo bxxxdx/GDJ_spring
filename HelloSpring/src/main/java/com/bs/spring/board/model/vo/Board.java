@@ -9,11 +9,11 @@ import lombok.Data;
 
 @Data
 public class Board {
-	int boardNo;
-	String boardTitle;
-	Member member;
-	String boardContent;
-	Date boardDate;
-	int boardReadcount;
-	List<Attachment> attachments;
+	private int boardNo;
+	private String boardTitle;
+	private Member boardWriter;
+	private String boardContent;
+	private Date boardDate;
+	private int boardReadcount;
+	private List<Attachment> files;
 }

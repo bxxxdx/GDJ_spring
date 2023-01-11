@@ -15,14 +15,19 @@
 </style>
 
 	<div id="board-container">
-		<input type="text" class="form-control" placeholder="제목" name="boardTitle" id="boardTitle"  required>
-		<input type="text" class="form-control" name="boardWriter"  readonly required>
+		<input type="text" class="form-control" placeholder="제목" name="boardTitle" id="boardTitle" value="${board.boardTitle}" required>
+		<input type="text" class="form-control" name="boardWriter" value="${board.boardWriter.userId}" readonly required>
+		<c:if test="${not empty board.files}">
+			<c:forEach var="file" items="${board.files}">
+				<button type="button" class="btn btn-outline-success btn-block" onclick="">${file.originalFilename}</button>
+			</c:forEach>	
+		</c:if>
 		
-		<button type="button" class="btn btn-outline-success btn-block"
-		onclick=""></button>
 		    
 		    
-		<textarea class="form-control" name="boardContent" placeholder="내용" required></textarea>
+		<textarea class="form-control" name="boardContent" placeholder="내용" required>
+			<c:out value="${board.boardContent}"/>
+		</textarea>
 	</div>
 
 
