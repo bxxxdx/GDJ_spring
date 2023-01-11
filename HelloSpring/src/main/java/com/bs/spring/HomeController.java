@@ -50,7 +50,7 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model) throws IllegalAccessException {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
@@ -59,6 +59,8 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
+		
+		if(1==1)throw new IllegalAccessException("내맘대로에러");
 		
 		return "home";
 	}

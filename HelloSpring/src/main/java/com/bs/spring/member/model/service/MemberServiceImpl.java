@@ -4,18 +4,18 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bs.spring.member.model.dao.MemberDaoImpl;
+import com.bs.spring.member.model.dao.MemberDao;
 import com.bs.spring.member.model.vo.Member;
 
 @Service
 public class MemberServiceImpl implements MemberService{
 	
-	private MemberDaoImpl dao;
+	private MemberDao  dao;
 	private SqlSessionTemplate session;
 	
 	//Alt + Shift + S + O
 	@Autowired
-	public MemberServiceImpl(MemberDaoImpl dao, SqlSessionTemplate session) {
+	public MemberServiceImpl(MemberDao dao, SqlSessionTemplate session) {
 		this.dao = dao;
 		this.session = session;
 	}

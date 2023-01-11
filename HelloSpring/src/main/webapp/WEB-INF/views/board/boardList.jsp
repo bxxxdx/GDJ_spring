@@ -43,6 +43,7 @@
             	</c:forEach>
             </c:if>
         </table>
+        <button class="btn btn-outline-success" onclick="${path}/board/insertBoard.do">글쓰기</button>
         <div id="pageBar">
         	${pageBar}
         </div> 
