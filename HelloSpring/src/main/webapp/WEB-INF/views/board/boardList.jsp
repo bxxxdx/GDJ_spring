@@ -31,7 +31,7 @@
             				<a href="${path}/board/boardView.do?boardNo=${board.boardNo}">${board.boardTitle}</a>
             			</td>
             			<td><c:out value="${board.boardWriter.userId}"/></td>
-            			<td><fmt:formatDate value="${board.boardDate}" type="date" dateStyle="full"/></td>
+            			<td><fmt:formatDate value="${board.boardDate}" type="both" dateStyle="full"/></td>
             			<td>
             				<c:if test="${not empty board.files}">
             					<img src="${path}/resources/images/file.png"> 

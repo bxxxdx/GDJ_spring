@@ -106,7 +106,7 @@ public class BoardController {
 					//MultipartFile 클래스가 제공해주는 메소드 이용해서 저장처리
 					f.transferTo(new File(path+renameFile));
 					files.add(Attachment.builder()
-							.originalFilename(f.getOriginalFilename())
+							.originalFilename(originalFileName)
 							.renamedFilename(renameFile).build());
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -123,7 +123,7 @@ public class BoardController {
 		
 		int result = service.insertBoard(b);
 		mv.addObject("msg",result > 0?"게시글 등록 성공":"게시글 등록 실패");
-		mv.addObject("loc","/board/boardList.do");
+		mv.addObject("loc","/board/board.do");
 		
 		mv.setViewName("common/msg");
 		

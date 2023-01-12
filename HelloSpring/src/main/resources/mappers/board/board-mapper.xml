@@ -25,7 +25,8 @@
 	<select id="selectBoardList" resultMap="boardMap">
 		SELECT * FROM BOARD B
 		JOIN MEMBER M ON B.BOARDWRITER=M.USERID 
-		LEFT JOIN ATTACHMENT A ON B.BOARDNO = A.BOARDNO
+		LEFT JOIN ATTACHMENT A ON B.BOARDNO = A.BOARDNO 
+		ORDER BY B.BOARDNO DESC
 	</select>
 	
 	<select id="selectBoardListCount" resultType="_int">
@@ -40,7 +41,17 @@
 	</select>
 	
 	<insert id="insertBoard" parameterType="board">
-		INSERT INTO BOARD VALUES(SEQ_BOARDNO.NEXTVAL, #{boardTitle}, #{boardWriter.userId}, #{boardContent}, DEFAULT, DEFAULT)
+		INSERT INTO BOARD VALUES
+		(SEQ_BOARDNO.NEXTVAL, #{boardTitle}, #{boardWriter.userId}, #{boardContent}, DEFAULT, DEFAULT)
+		<selectKey keyProperty="boardNo" resultType="_int" order="AFTER">
+			SELECT SEQ_BOARDNO.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<insert id="insertAttachment" parameterType="attachment">
+		INSERT INTO ATTACHMENT VALUES 
+		(SEQ_ATTACHMENTNO.NEXTVAL, #{board.boardNo}, #{originalFilename}, #{renamedFilename}, 
+		DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
 </mapper>

@@ -1,7 +1,10 @@
 package com.bs.spring.board.model.dao;
 
 import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
+
+import com.bs.spring.board.model.vo.Attachment;
 import com.bs.spring.board.model.vo.Board;
 
 public interface BoardDao {
@@ -14,7 +17,7 @@ public interface BoardDao {
 	
 	Board selectBoard(SqlSessionTemplate session, int boardNo);
 	
-	
+	int insertAttachment(SqlSessionTemplate session, Attachment a);
 	
 	
 	
