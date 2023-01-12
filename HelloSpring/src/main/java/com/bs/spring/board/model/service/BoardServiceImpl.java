@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bs.spring.board.model.dao.BoardDao;
@@ -37,7 +38,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	@Transactional
+	//@Transactional
 	public int insertBoard(Board b) {
 		//1. 게시글을 등록하고
 		//2. 첨부파일을 등록
