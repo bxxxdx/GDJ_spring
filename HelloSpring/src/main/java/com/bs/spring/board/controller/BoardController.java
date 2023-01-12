@@ -1,15 +1,21 @@
 package com.bs.spring.board.controller;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -131,7 +137,45 @@ public class BoardController {
 	}
 	
 	
-	
+	@RequestMapping("/fileDown.do")
+	public void fileDown(String ori, String re, 
+			HttpServletResponse response, HttpSession session,
+			@RequestHeader(value="User-agent") String header) {
+		//User-agent 는 한글로 된 파일을 인코딩 처리 하기 위해서
+		//HttpSession은 절대경로를 찾기 위해서
+		log.debug(ori + " / " + re);
+		String path = session.getServletContext().getRealPath("/resources/upload/board/");
+		File downloadFile = new File(path + re);
+		try(FileInputStream fis = new FileInputStream(downloadFile)){
+			BufferedInputStream bis = new BufferedInputStream(fis);
+			//스트림을 열어 놓는다
+			ServletOutputStream sos = response.getOutputStream();
+			//파일명 인코딩하기
+			boolean isMS = header.contains("Trident")||header.contains("MSIE");
+			String encodeFilename = "";
+			if(isMS) {
+				encodeFilename = URLEncoder.encode(ori, "UTF-8");
+				encodeFilename = encodeFilename.replaceAll("\\+", "%20");
+			} else {
+				//한글파일일땐 깨지니깐!
+				encodeFilename = new String(ori.getBytes("UTF-8"),"ISO-8859-1");
+			}
+			
+			response.setContentType("application/octet-stream;charset=utf-8");
+			response.setHeader("Content-Disposition", "attachment;filename=\""+encodeFilename+"\"");
+			
+			int read = -1;
+			while((read = bis.read())!= -1) {
+				sos.write(read);
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
 	
 	
 	
