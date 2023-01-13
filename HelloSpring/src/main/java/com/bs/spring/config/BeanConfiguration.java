@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.bs.spring.model.vo.Animal;
 import com.bs.spring.model.vo.Person;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 //beanconfiguration 클래스로 구현하기 -> 어노테이션 이용
 @Configuration
@@ -40,7 +41,10 @@ public class BeanConfiguration {
 		return p;
 	}
 	
-	
+	@Bean
+	public ObjectMapper mapper() {
+		return new ObjectMapper();
+	}
 	
 	
 	
