@@ -219,14 +219,19 @@
 		    <version>2.14.1</version>
 		</dependency>
 		
-		
+		<!-- gson -->
 		<dependency>
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
 		    <version>2.10.1</version>
 		</dependency>
 		
-		
+		<!-- websocket -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
 		
 		
 		
