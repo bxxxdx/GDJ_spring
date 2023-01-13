@@ -121,12 +121,12 @@ public class BoardController {
 	@RequestMapping("/board/writeBoardEnd.do")
 	public ModelAndView writeBoardEnd(ModelAndView mv, MultipartFile upFile,
 				String boardTitle, String boardWriter, String boardContent, HttpSession session) {
-		// 파일 업로드 부분 생략.. 채워넣어야함 !
+		// 파일 업로드 부분 생략.. 채워넣어야함 ! => 완료
 		
 		String path = session.getServletContext().getRealPath("/resources/upload/board/");
 		
-		System.out.println(upFile.getOriginalFilename());
-		log.debug(boardTitle + " " + boardWriter + " " + boardContent);
+		//System.out.println(upFile.getOriginalFilename());
+		//log.debug(boardTitle + " " + boardWriter + " " + boardContent);
 		
 		File dir = new File(path);
 		if(!dir.exists()) {
