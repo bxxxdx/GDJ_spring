@@ -38,10 +38,10 @@
            				<td><a href='${path}/notice/readNotice.do?noticeNo=${notice.noticeNo}'><c:out value="${notice.noticeTitle}"/></a></td>
            				<td><c:out value="${notice.member.userId}"/></td>
            				<td>
-							<c:if test="${not empty notice.filePath}">
-								<img src="${path}/images/file.png" width="20" height="20">
+							<c:if test="${notice.filePath != null}">
+								<img src="${path}/resources/images/file.png" width="20" height="20">
 							</c:if>       
-							<c:if test ="${empty notice.filePath}">
+							<c:if test ="${notice.filePath == null}">
 								첨부파일없음
 							</c:if>   				
            				</td>

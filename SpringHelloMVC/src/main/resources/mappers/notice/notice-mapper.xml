@@ -35,7 +35,7 @@
 	<insert id="insertNotice" parameterType="map">
 		<![CDATA[ 
 			INSERT INTO NOTICE VALUES(SEQ_NOTICE_NO.NEXTVAL,
-			#{noticeTitle},#{noticeWriter},#{noticeContent},DEFAULT,#{fileName},DEFAULT)
+			#{noticeTitle},#{member.userId},#{noticeContent},DEFAULT,#{filePath},DEFAULT)
 		]]>
 	</insert>
 	

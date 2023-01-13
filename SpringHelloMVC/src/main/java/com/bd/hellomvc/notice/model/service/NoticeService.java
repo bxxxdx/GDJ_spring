@@ -13,7 +13,7 @@ public interface NoticeService {
 	
 	Notice searchNoticeNo(int noticeNo);
 	
-	int insertNotice(Map param);
+	int insertNotice(Notice n);
 	
 	int updateNotice(Map param);
 	

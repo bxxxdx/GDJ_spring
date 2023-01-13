@@ -15,7 +15,7 @@ public interface NoticeDao {
 	
 	Notice searchNoticeNo(SqlSessionTemplate session, int noticeNo);
 	
-	int insertNotice(SqlSessionTemplate session, Map param);
+	int insertNotice(SqlSessionTemplate session, Notice n);
 	
 	int updateNotice(SqlSessionTemplate session, Map param);
 	

@@ -30,7 +30,7 @@
 	            <th>첨부파일</th>
 	            <td>
 	            	<c:if test="${notice.filePath != null}">
-	            		<img src="${path}/images/file.png" width="20" onclick="fn_fileDown('<c:out value="${notice.filePath}"/>');">&nbsp;<c:out value="${notice.filePath}"/>
+	            		<img src="${path}/resources/images/file.png" width="20" onclick="fn_fileDown('<c:out value="${notice.filePath}"/>');">&nbsp;<c:out value="${notice.filePath}"/>
 	            	</c:if>
 	            	<c:if test="${notice.filePath == null}">
 	            		첨부파일없음

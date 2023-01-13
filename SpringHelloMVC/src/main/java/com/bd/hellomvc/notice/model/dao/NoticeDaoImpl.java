@@ -28,8 +28,8 @@ public class NoticeDaoImpl implements NoticeDao {
 	}
 
 	@Override
-	public int insertNotice(SqlSessionTemplate session, Map param) {
-		return session.insert("notice.insertNotice", param);
+	public int insertNotice(SqlSessionTemplate session, Notice n) {
+		return session.insert("notice.insertNotice", n);
 	}
 
 	@Override

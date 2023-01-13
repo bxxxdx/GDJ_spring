@@ -38,8 +38,8 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public int insertNotice(Map param) {
-		return dao.insertNotice(session, param);
+	public int insertNotice(Notice n) {
+		return dao.insertNotice(session, n);
 	}
 
 	@Override

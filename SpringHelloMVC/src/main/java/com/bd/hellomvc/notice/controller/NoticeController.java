@@ -1,16 +1,28 @@
 package com.bd.hellomvc.notice.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bd.hellomvc.member.model.vo.Member;
 import com.bd.hellomvc.notice.model.service.NoticeService;
 import com.bd.hellomvc.notice.model.vo.Notice;
 
@@ -84,11 +96,35 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/notice/writeNoticeEnd.do")
-	public ModelAndView writeNoticeEnd(ModelAndView mv, 
-				@RequestParam Map param){
+	public ModelAndView writeNoticeEnd(ModelAndView mv, MultipartFile upFile,
+			String noticeTitle, String noticeWriter, String noticeContent, HttpSession session){
 		
-		//System.out.println(param);
-		int result = service.insertNotice(param);
+		String path = session.getServletContext().getRealPath("/resources/upload/notice/");
+		
+		File dir = new File(path);
+		if(!dir.exists()) {
+			dir.mkdirs();
+		}
+		String re = null;
+		if(upFile != null) {
+			String ori = upFile.getOriginalFilename();
+			String ext = ori.substring(ori.lastIndexOf("."));
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rnd = (int)(Math.random() * 10000) + 1;
+			re = sdf.format(System.currentTimeMillis())+ "_" + rnd + ext;
+			
+			try {
+				upFile.transferTo(new File(path + re));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		Notice n = Notice.builder().noticeTitle(noticeTitle).member(Member.builder().userId(noticeWriter).build())
+				.noticeContent(noticeContent).filePath(re).build();
+		
+		
+		int result = service.insertNotice(n);
 		
 		String msg = "";
 		String loc = "";
@@ -154,6 +190,60 @@ public class NoticeController {
 		
 		return mv;
 	}
+	
+	@RequestMapping("/notice/fileDown.do")
+	public void fileDown(String fileName, HttpServletResponse response, HttpSession session, 
+			@RequestHeader(value="User-agent")String header) {
+
+		String path = session.getServletContext().getRealPath("/resources/upload/notice/");
+		File downloadFile = new File(path + fileName);
+		try(FileInputStream fis = new FileInputStream(downloadFile)){
+			BufferedInputStream bis = new BufferedInputStream(fis);
+			ServletOutputStream sos = response.getOutputStream();
+			boolean isMS = header.contains("Trident")||header.contains("MSIE");
+			String encodeFilename = "";
+			if(isMS) {
+				encodeFilename = URLEncoder.encode(fileName,"UTF-8");
+				encodeFilename = encodeFilename.replaceAll("\\+", "%20");
+			} else {
+				encodeFilename = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+			}
+			
+			response.setContentType("application/octet-stream;charset=utf-8");
+			response.setHeader("Content-Disposition", "attachment;filename=\""+encodeFilename+"\"");
+			
+			int read = -1;
+			while((read = bis.read()) != -1) {
+				sos.write(read);
+			}
+		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
