@@ -41,8 +41,7 @@
 
 <section id='board-container'>
 	<h2>게시판 작성</h2>
-	<%-- <form action="${path}/board/writeBoardEnd.do" method="post" onsubmit="return fn_submitChk()"  enctype="multipart/form-data"> --%>
-	<form action="${path}/board/writeBoardEnd.do" method="post" onsubmit="return fn_submitChk()">	
+	<form action="${path}/board/writeBoardEnd.do" method="post" onsubmit="return fn_submitChk()"  enctype="multipart/form-data">
 		<table id='tbl-board'>
 			<tr>
 				<th>제목</th>

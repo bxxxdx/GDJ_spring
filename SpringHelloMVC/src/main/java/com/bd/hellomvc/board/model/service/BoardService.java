@@ -15,7 +15,7 @@ public interface BoardService {
 	
 	Board searchBoardNo(Map param, boolean readFlag);
 	
-	int insertBoard(Map param);
+	int insertBoard(Board b);
 	
 	int insertBoardComment(Map param);
 	

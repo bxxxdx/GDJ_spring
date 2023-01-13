@@ -68,7 +68,7 @@
 					첨부파일없음
 				<%} %>  --%>
 				<c:if test="${board.boardOriginalFilename != null}">
-					<img src="${path}/resources/images/file.png" width="20" onclick="fn_fileDown('${board.boardRenamedFilename}');">&nbsp;${board.boardRenamedFilename}
+					<img src="${path}/resources/images/file.png" width="20" onclick="fn_fileDown('${board.boardOriginalFilename}', '${board.boardRenamedFilename}');">&nbsp;${board.boardOriginalFilename}
 				</c:if>
 				<c:if test="${board.boardOriginalFilename == null }">
 					첨부파일없음
@@ -145,6 +145,12 @@
 	</div>
 </section>
 <script>
+	const fn_fileDown = (ori, re) => {
+			if(confirm("파일을 다운로드하시겠습니까?")){
+				location.assign("${path}/board/fileDown.do?ori="+ori+"&re="+re);
+			}	
+		}
+
 	const fn_delete = () => {
 		let result = confirm("게시물을 정말 삭제하시겠습니까?");
 		if(result) {

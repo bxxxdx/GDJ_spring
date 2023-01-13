@@ -19,7 +19,7 @@ public interface BoardDao {
 	
 	int updateReadcount(SqlSessionTemplate session, int boardNo);
 	
-	int insertBoard(SqlSessionTemplate session, Map param);
+	int insertBoard(SqlSessionTemplate session, Board b);
 	
 	int insertBoardComment(SqlSessionTemplate session, Map param);
 	

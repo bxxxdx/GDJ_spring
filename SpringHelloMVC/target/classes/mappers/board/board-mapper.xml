@@ -92,10 +92,10 @@
   		WHERE BOARD_NO = #{boardNo}	
   	</update>
   	
-  	<insert id="insertBoard" parameterType="map">
+  	<insert id="insertBoard" parameterType="board">
   		INSERT INTO BOARD VALUES(
   		SEQ_BOARD_NO.NEXTVAL, 
-  		#{boardTitle}, #{boardWriter}, #{boardContent}, #{oriName}, #{fileName}, 
+  		#{boardTitle}, #{member.userId}, #{boardContent}, #{boardOriginalFilename}, #{boardRenamedFilename}, 
   		DEFAULT, DEFAULT)
   	</insert>
   	

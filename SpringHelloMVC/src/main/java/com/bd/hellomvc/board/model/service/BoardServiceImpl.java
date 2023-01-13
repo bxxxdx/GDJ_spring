@@ -49,8 +49,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int insertBoard(Map param) {
-		return dao.insertBoard(session, param);
+	public int insertBoard(Board b) {
+		return dao.insertBoard(session, b);
 	}
 
 	@Override

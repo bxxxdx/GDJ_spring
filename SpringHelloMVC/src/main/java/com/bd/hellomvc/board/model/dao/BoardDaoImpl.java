@@ -38,8 +38,8 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int insertBoard(SqlSessionTemplate session, Map param) {
-		return session.insert("board.insertBoard", param);
+	public int insertBoard(SqlSessionTemplate session, Board b) {
+		return session.insert("board.insertBoard", b);
 	}
 
 	@Override

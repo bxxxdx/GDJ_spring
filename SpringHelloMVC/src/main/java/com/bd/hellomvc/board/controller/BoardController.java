@@ -1,24 +1,38 @@
 package com.bd.hellomvc.board.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bd.hellomvc.board.model.service.BoardService;
 import com.bd.hellomvc.board.model.vo.Board;
+import com.bd.hellomvc.member.model.vo.Member;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@Slf4j
 public class BoardController {
 	private BoardService service;
 	
@@ -105,11 +119,40 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/board/writeBoardEnd.do")
-	public ModelAndView writeBoardEnd(ModelAndView mv,
-				@RequestParam Map param) {
+	public ModelAndView writeBoardEnd(ModelAndView mv, MultipartFile upFile,
+				String boardTitle, String boardWriter, String boardContent, HttpSession session) {
 		// 파일 업로드 부분 생략.. 채워넣어야함 !
 		
-		int result = service.insertBoard(param);
+		String path = session.getServletContext().getRealPath("/resources/upload/board/");
+		
+		System.out.println(upFile.getOriginalFilename());
+		log.debug(boardTitle + " " + boardWriter + " " + boardContent);
+		
+		File dir = new File(path);
+		if(!dir.exists()) {
+			dir.mkdirs();
+		}
+		
+		String boardOriginalFilename = null;
+		String boardRenamedFilename = null;
+		if(upFile != null) {
+			boardOriginalFilename = upFile.getOriginalFilename();
+			String ext = boardOriginalFilename.substring(boardOriginalFilename.lastIndexOf("."));
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rnd = (int)(Math.random() * 10000) + 1;
+			boardRenamedFilename = sdf.format(System.currentTimeMillis())+ "_" + rnd + ext;
+			
+			try {
+				upFile.transferTo(new File(path + boardRenamedFilename));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		Board b = Board.builder().boardTitle(boardTitle).member(Member.builder().userId(boardWriter).build()).boardContent(boardContent)
+					.boardOriginalFilename(boardOriginalFilename).boardRenamedFilename(boardRenamedFilename).build();
+		
+		int result = service.insertBoard(b);
 		
 		if(result > 0) {
 			mv.addObject("msg","게시판 등록 성공!!");
@@ -222,7 +265,36 @@ public class BoardController {
 		return mv;
 	}
 	
-	
+	@RequestMapping("/board/fileDown.do")
+	public void fileDown(String ori, String re, HttpServletResponse response, HttpSession session, 
+						@RequestHeader(value="User-agent")String header) {
+		
+		String path = session.getServletContext().getRealPath("/resources/upload/board/");
+		File downloadFile = new File(path + re);
+		try(FileInputStream fis = new FileInputStream(downloadFile)){
+			BufferedInputStream bis = new BufferedInputStream(fis);
+			ServletOutputStream sos = response.getOutputStream();
+			boolean isMS = header.contains("Trident")||header.contains("MSIE");
+			String encodeFilename = "";
+			if(isMS) {
+				encodeFilename = URLEncoder.encode(ori,"UTF-8");
+				encodeFilename = encodeFilename.replaceAll("\\+", "%20");
+			} else {
+				encodeFilename = new String(ori.getBytes("UTF-8"), "ISO-8859-1");
+			}
+			
+			response.setContentType("application/octet-stream;charset=utf-8");
+			response.setHeader("Content-Disposition", "attachment;filename=\""+encodeFilename+"\"");
+			
+			int read = -1;
+			while((read = bis.read()) != -1) {
+				sos.write(read);
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	
