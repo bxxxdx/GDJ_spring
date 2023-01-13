@@ -1,16 +1,26 @@
 package com.bs.spring.member.controller;
 
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bs.spring.member.model.service.MemberService;
 import com.bs.spring.member.model.vo.Member;
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -109,14 +119,57 @@ public class MemberController {
 	}
 	
 	
+	@RequestMapping("/duplicateId.do")
+	public void duplicateId(String userId, HttpServletResponse res) throws IOException {
+		
+		Member m = service.selectMemberById(Member.builder().userId(userId).build());
+		res.setContentType("text/csv;charset=utf-8");
+		res.getWriter().print(m==null?false:true);		
+		
+	}
 	
 	
+	@RequestMapping("/duplicateIdGson.do")
+	public void duplicateIdGson(String userId, HttpServletResponse res) throws JsonIOException, IOException {
+		//log.debug(userId);
+		Member m = service.selectMemberById(Member.builder().userId(userId).build());
+		
+		res.setContentType("text/csv;charset=utf-8");
+		
+		Gson gson = new Gson();
+		
+		new Gson().toJson(m,res.getWriter());
+	}
 	
+	//jackson 바인더를 이용해서 json 응답메소드 구현하기
+	//메소드에 @ResponseBody 어노테이션 적용
+	@RequestMapping("/duplicateConverter.do")
+	@ResponseBody
+	public Member duplicateUserId(Member m) {
+		
+		Member result = service.selectMemberById(m);
+		
+		return result;
+	}
 	
+	@RequestMapping(value = "/selectMemberList.do",
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<Member> selectMemberList(@RequestBody Member m){
+		
+		//ResponseBody : Json으로 보내는 것
+		//RequestBody : Json to JavaObject
+		
+		return service.selectMemberList();
+	}
 	
-	
-	
-	
+	@RequestMapping(value="/ajax/insert",
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody boolean insertTest(@RequestBody Member m) {
+		log.debug("{}", m);
+		return true;
+	}
 	
 	
 	

@@ -24,4 +24,12 @@
 		(#{userId},#{password},#{userName},#{gender},#{age},#{email},#{phone},#{address},#{hobby,typeHandler=strArr},DEFAULT)
 	</insert>
 	
+	<select id="selectMemberList" resultMap="memberMap">
+		SELECT * FROM MEMBER
+	</select>
+	
+	<select id="selectMemberCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+	
 </mapper>
