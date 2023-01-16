@@ -20,12 +20,10 @@
 				Entity(DB 테이블이랑 맵핑된 클래스)로 등록된 클래스를 자동으로 DB에 생성해줄까? (테이블 만드는건가)
 				개발중, 테스트할때 사용, 운영애플리케이션에서는 사용하지 않았으면 합니다..... 이전 데이터를 날려버린다..  손해배상을 해야할 수도
 			-->
-			<property name="hibernate.hbm2ddl.auto" value="create"/>
 			
+			<!-- 넌 자꾸 드랍하니깐 그만 쓴다 -->
+			<!-- <property name="hibernate.hbm2ddl.auto" value="create"/> -->
 			
-				
-			
-		
 		</properties>
 	</persistence-unit>
 </persistence>
