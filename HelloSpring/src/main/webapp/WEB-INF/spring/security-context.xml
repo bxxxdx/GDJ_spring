@@ -47,7 +47,14 @@
 		<security:intercept-url pattern="/resources/**" access="permitAll()"/>
 		<security:intercept-url pattern="/member/loginpage.do" access="permitAll()"/>
 		<security:intercept-url pattern="/member/enrollMember.do" access="permitAll()"/>
-		<security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>
+		
+		<!-- 로그아웃 처리하기 -->
+		<security:logout logout-url="/logout" logout-success-url="/"/>
+		
+		<!-- 권한에 맞지 않는 주소에 접근했을 때 -->
+		<security:access-denied-handler error-page="/WEB-INF/views/error/adminError.jsp"/>
+		
 	</security:http>
 	
 	<!-- 
