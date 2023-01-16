@@ -16,31 +16,31 @@ public class BeanConfiguration {
 	 * 객체를 반환하는 메소드를 구현
 	 */
 	
-	@Bean
-	public Person getDongmin() {
-		Person p = new Person();
-		p.setName("이동민"); 
-		p.setAge(28);
-		p.setMyAnimal(cow());
-		return p;
-	}
-	
-	@Bean
-	@Qualifier("song")
-	public Animal cow() {		
-		return new Animal("얼룩송아지",5,"여",100.5);
-	}
-	
-	@Bean
-	@Autowired
-	public Person ujun(@Qualifier("song")Animal a) {
-		Person p = new Person();
-		p.setName("김유준");
-		p.setAge(33);
-		p.setMyAnimal(a);
-		return p;
-	}
-	
+//	@Bean
+//	public Person getDongmin() {
+//		Person p = new Person();
+//		p.setName("이동민"); 
+//		p.setAge(28);
+//		p.setMyAnimal(cow());
+//		return p;
+//	}
+//	
+//	@Bean
+//	@Qualifier("song")
+//	public Animal cow() {		
+//		return new Animal("얼룩송아지",5,"여",100.5);
+//	}
+//	
+//	@Bean
+//	@Autowired
+//	public Person ujun(@Qualifier("song")Animal a) {
+//		Person p = new Person();
+//		p.setName("김유준");
+//		p.setAge(33);
+//		p.setMyAnimal(a);
+//		return p;
+//	}
+//	
 	@Bean
 	public ObjectMapper mapper() {
 		return new ObjectMapper();

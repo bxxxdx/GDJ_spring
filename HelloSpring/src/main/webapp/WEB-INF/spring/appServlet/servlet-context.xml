@@ -40,23 +40,23 @@
 	</beans:bean> -->
 	
 	<!-- 매개변수 있는 생성자로 초기화하기 -->
-	<beans:bean id="alonge" class="com.bs.spring.model.vo.Animal">
+	<!-- <beans:bean id="alonge" class="com.bs.spring.model.vo.Animal">
 		<beans:constructor-arg index="0" value="아롱이"/>
 		<beans:constructor-arg index="1" value="9"/>
-		<!-- 
+		
 			<beans:constructor-arg index="2" value="여"/>
 			<beans:constructor-arg index="3" value="5.8"/> 
-		-->
-	</beans:bean>
+		
+	</beans:bean> -->
 	
-	<beans:bean id="dog" class="com.bs.spring.model.vo.Animal" init-method="initTest" destroy-method="destroyTest">
+	<!-- <beans:bean id="dog" class="com.bs.spring.model.vo.Animal" init-method="initTest" destroy-method="destroyTest">
 	</beans:bean>
 	
 	<beans:bean id="yeonji" class="com.bs.spring.model.vo.Person">
 		<beans:property name="name" value="연지"/>
 		<beans:property name="age" value="31"/>
 		<beans:property name="myAnimal" ref="alonge"/>
-	</beans:bean>
+	</beans:bean> -->
 	
 	<beans:bean id="logincheck" class="com.bs.spring.common.interceptor.LoginCheckInterceptor">
 	</beans:bean>
@@ -98,7 +98,7 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
-	
+	 
 	
 	<!-- websocket 클래스 빈으로 등록하기-->
 	<beans:bean id="chatting" class="com.bs.spring.websocket.ChattingServer"/>

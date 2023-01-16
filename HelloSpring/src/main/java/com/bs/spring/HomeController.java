@@ -39,20 +39,20 @@ public class HomeController {
 	
 	/* 등록되어 있는 springbean은 필드선언해서 사용 */
 	
-	@Autowired
-	@Qualifier(value="alonge")
-	private Animal a;
-	
-	@Autowired
-	@Qualifier(value="song")
-	private Animal b;
-	
-	@Autowired
-	@Qualifier(value="getDongmin")
-	private Person p;
-	
-	@Autowired(required = false)
-	private Food food;
+//	@Autowired
+//	@Qualifier(value="alonge")
+//	private Animal a;
+//	
+//	@Autowired
+//	@Qualifier(value="song")
+//	private Animal b;
+//	
+//	@Autowired
+//	@Qualifier(value="getDongmin")
+//	private Person p;
+//	
+//	@Autowired(required = false)
+//	private Food food;
 
 	
 	
@@ -147,7 +147,7 @@ public class HomeController {
 		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		logger.debug("{}",o);
 		
-		m.addAttribute("loginMember", Member.builder().userId(((User)o).getUsername()).build());
+		m.addAttribute("loginMember", (Member)o );
 		
 		return "redirect:/";
 	}

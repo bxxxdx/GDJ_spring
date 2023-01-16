@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import ="com.bs.spring.member.model.vo.Member" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -28,7 +29,10 @@
 		<header>
 			<div id="header-container">
 				<h2>${param.title }</h2>
-				<p>시큐리티 세션값 : ${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}</p>
+				<p>시큐리티 세션값 : ${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}
+					${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.age} 
+					${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}
+				</p>
 			</div>
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<a class="navbar-brand" href="#">
@@ -67,7 +71,7 @@
 							<a href="${path}/member/memberView.do?userId=${loginMember.userId}"><c:out value="${loginMember.userId}"/>님</a> 환영합니다. 
 						</span>
 						<button class="btn btn-outline-danger my-2 my-sm-0" onclick="chattingPageOpen();">채팅하기</button>
-						&nbsp;<button class="btn btn-outline-success my-2 my-sm-0" onclick="location.replace('${path}/member/logoutMember.do')"> 로그아웃</button>
+						&nbsp;<button class="btn btn-outline-success my-2 my-sm-0" onclick="location.replace('${path}/logout')"> 로그아웃</button>
 					</c:if>		
 				</div>
 			</nav>	
@@ -83,7 +87,7 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form action="${path}/member/loginMember.do" method="post">
+					<form action="${path}/login" method="post">
 						<div class="modal-body">
 							<input type="text" name="userId" class="form-control" placeholder="아이디입력" required><br>
 							<input type="password" name="password" class="form-control" placeholder="비밀번호입력" required>					
