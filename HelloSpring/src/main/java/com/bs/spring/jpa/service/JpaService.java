@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.bs.spring.jpa.model.entity.JpaMember;
+import com.bs.spring.jpa.model.entity.Major;
 
 public interface JpaService {
 	
@@ -18,4 +19,8 @@ public interface JpaService {
 	List<JpaMember> selectMemberAll();
 	
 	List<JpaMember> selectMemberSearch(double height);
+	
+	void insertMember();
+	
+	Major selectMajor(Long no);
 }

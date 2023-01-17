@@ -28,9 +28,11 @@
  		</form>
  	<h3><a href="${path}/jpa/members">전체 jpa회원 조회하기</a></h3>	
  	<h3><a href="${path}/jpa/member?no=1">jpa회원 조회하기</a></h3>
+ 	<h3><a href="${path}/jpa/member/search?height=180.6">jpa회원 조건조회하기</a></h3>
  	<h3><a href="${path}/jpa/update?no=1&age=20&height=190.5&intro=어휴졸려">jpa회원 수정</a></h3>
  	<h3><a href="${path}/jpa/delete?no=1">jpa회원 삭제하기</a></h3>
- 	<h3><a href="${path}/jpa/member/search?height=180.6">jpa회원 조건조회하기</a></h3>
+ 	<h3><a href="${path}/jpa/insertMember">jpa 다대일 클래스 저장</a></h3>
+ 	<h3><a href="${path}/jpa/major?no=1">학과조회하기</a></h3>
  </section>
  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 <script>

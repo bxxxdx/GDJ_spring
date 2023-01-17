@@ -9,7 +9,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,6 +21,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 //생성한 클래스를 jpa와 연동하는 Entity로 등록하려면 @Entity Annotation을 이용한다.
 //@Entity Annotation -> jpa 관리하는 DB와 연동되는 객체를 의미함.
@@ -28,6 +31,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 //@Entity(name="JPATEST")
+@ToString(exclude = "major")
 @Entity
 @Table(name="JPA_MEMBER") // DB 테이블을 설정, schema, catalog 속성설정이 가능, 
 //uniqueConstraint 컬럼에 대한 제약조건 설정 가능(테이블 레벨에서..), 일반적으로 안적어도 문제는 없긴 하다..
@@ -54,4 +58,9 @@ public class JpaMember {
 	
 	@Lob
 	private String intro;
+	
+	// @oneToMany, @ManyToOne, @OneToOne, @ManyToMany
+	@ManyToOne
+	@JoinColumn(name="majorNo")
+	private Major major;
 }

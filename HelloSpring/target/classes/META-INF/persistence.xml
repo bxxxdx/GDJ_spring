@@ -22,7 +22,12 @@
 			-->
 			
 			<!-- 넌 자꾸 드랍하니깐 그만 쓴다 -->
-			<!-- <property name="hibernate.hbm2ddl.auto" value="create"/> -->
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			
+			
+			
+			
+			
 			
 		</properties>
 	</persistence-unit>

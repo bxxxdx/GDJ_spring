@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.bs.spring.jpa.dao.JpaDao;
 import com.bs.spring.jpa.model.entity.JpaMember;
+import com.bs.spring.jpa.model.entity.Major;
 
 @Service
 public class JpaServiceImpl implements JpaService {
@@ -76,6 +77,19 @@ public class JpaServiceImpl implements JpaService {
 	@Override
 	public List<JpaMember> selectMemberSearch(double height) {
 		return dao.selectMemberSearch(em, height);
+	}
+
+	@Override
+	public void insertMember() {
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		dao.insertMember(em);
+		et.commit();
+	}
+
+	@Override
+	public Major selectMajor(Long no) {
+		return dao.selectMajor(em, no);
 	}
 
 }

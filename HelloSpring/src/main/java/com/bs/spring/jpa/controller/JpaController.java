@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bs.spring.jpa.model.entity.JpaMember;
+import com.bs.spring.jpa.model.entity.Major;
 import com.bs.spring.jpa.model.entity.MemberLevel;
 import com.bs.spring.jpa.service.JpaService;
 
@@ -77,9 +78,20 @@ public class JpaController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping("/jpa/insertMember")
+	public String insertMember() {
+		
+		service.insertMember();
+		
+		return "redirect:/";
+	}
 	
-	
-	
+	@RequestMapping("/jpa/major")
+	public String selectMajor(Long no) {
+		Major major = service.selectMajor(no);
+		log.debug("{}",major);
+		return "redirect:/";
+	}
 	
 	
 	
