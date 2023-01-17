@@ -7,10 +7,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bs.spring.jpa.model.entity.Club;
 import com.bs.spring.jpa.model.entity.JpaMember;
 import com.bs.spring.jpa.model.entity.Major;
 import com.bs.spring.jpa.model.entity.MemberLevel;
+import com.bs.spring.jpa.model.entity.Student;
 import com.bs.spring.jpa.service.JpaService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -93,7 +96,22 @@ public class JpaController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping("/jpa/insertStudentClub")
+	public String insertStudentClub() {
+		service.insertStudentClub();
+		return "redirect:/";
+	}
 	
+	@RequestMapping("/jpa/selectStudent")
+	@ResponseBody
+	public Student selectStudent(Long no) {
+		return service.selectStudent(no);
+	}
 	
+	@RequestMapping("/jpa/selectClub")
+	@ResponseBody 
+	public Club selectClub(Long no) {
+		return service.selectClub(no);
+	}
 	
 }

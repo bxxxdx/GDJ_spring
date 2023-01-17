@@ -33,6 +33,10 @@
  	<h3><a href="${path}/jpa/delete?no=1">jpa회원 삭제하기</a></h3>
  	<h3><a href="${path}/jpa/insertMember">jpa 다대일 클래스 저장</a></h3>
  	<h3><a href="${path}/jpa/major?no=1">학과조회하기</a></h3>
+ 	
+ 	<h3><a href="${path}/jpa/insertStudentClub">jpa 다대다 저장하기</a></h3>
+ 	<h3><a href="${path}/jpa/selectStudent?no=1">jpa 다대다 student 저장하기</a></h3>
+ 	<h3><a href="${path}/jpa/selectClub?no=1">jpa 다대다 club 저장하기</a></h3>
  </section>
  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 <script>

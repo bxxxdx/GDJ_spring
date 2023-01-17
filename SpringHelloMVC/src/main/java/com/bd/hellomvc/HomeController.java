@@ -22,4 +22,9 @@ public class HomeController {
 		return "index";
 	}
 	
+	@RequestMapping("/kakaoTest")
+	public String kakaoLogin() {
+		return "test/kakaoTest";
+	}
+	
 }

@@ -22,26 +22,33 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@SequenceGenerator(name="SEQ_STUDENTNO", sequenceName="SEQ_STUDENTNO", allocationSize=1)
+@SequenceGenerator(name="SEQ_CLUBNO", sequenceName="SEQ_CLUBNO", allocationSize=1)
 //json으로 파싱할 때 무한루핑 방지하기
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
-public class Student {
+public class Club {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SEQ_STUDENTNO")
-	private Long studentNo;
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_CLUBNO")
+	private Long clubNo;
 	
-	private String studentName;
+	private String name;
 	
-	private Integer grade;
+	private String location;
 	
-	private Integer classNumber;
+//	@ManyToMany(mappedBy="clubs")
+//	private List<Student> students;
 	
-//	@ManyToMany
-//	@JoinTable(name="STUDENT_CLUB"
-//		, joinColumns=@JoinColumn(name="studentNo") // 현 Entity의 pk를 참조할 컬럼
-//		, inverseJoinColumns = @JoinColumn(name="clubNo")) //연결된 상대방 Entity의 Pk를 참조할 컬럼
-//	private List<Club> clubs;
-	
-	@OneToMany(mappedBy="student")
+	@OneToMany(mappedBy="club")
 	private List<StudentClubs> studentClubs;
+	
+	@Override
+	public String toString() {
+		String temp = "";
+//		for(Student s : students) {
+//			temp += s.getStudentName() + " " + s.getGrade() + " " + s.getClassNumber() + " gg " ;
+//		}
+		return "Club [clubNo=" + clubNo + ", name=" + name + ", location=" + location + ", students=" + temp + "]";
+	}
+
+	
+	
 }

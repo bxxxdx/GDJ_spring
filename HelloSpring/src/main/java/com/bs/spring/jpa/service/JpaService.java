@@ -3,8 +3,12 @@ package com.bs.spring.jpa.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+
+import com.bs.spring.jpa.model.entity.Club;
 import com.bs.spring.jpa.model.entity.JpaMember;
 import com.bs.spring.jpa.model.entity.Major;
+import com.bs.spring.jpa.model.entity.Student;
 
 public interface JpaService {
 	
@@ -23,4 +27,10 @@ public interface JpaService {
 	void insertMember();
 	
 	Major selectMajor(Long no);
+	
+	void insertStudentClub();
+	
+	Student selectStudent(Long no);
+	
+	Club selectClub(Long no);
 }

@@ -8,8 +8,11 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
+import com.bs.spring.jpa.model.entity.Club;
 import com.bs.spring.jpa.model.entity.JpaMember;
 import com.bs.spring.jpa.model.entity.Major;
+import com.bs.spring.jpa.model.entity.Student;
+import com.bs.spring.jpa.model.entity.StudentClubs;
 
 @Repository
 public class JpaDaoImpl implements JpaDao {
@@ -78,6 +81,59 @@ public class JpaDaoImpl implements JpaDao {
 	@Override
 	public Major selectMajor(EntityManager em, Long no) {
 		return em.find(Major.class, no);
+	}
+
+	@Override
+	public void insertStudentClub(EntityManager em) {
+		Student s1 = Student.builder().studentName("김유준").grade(3).classNumber(1).build();
+		Student s2 = Student.builder().studentName("이동민").grade(2).classNumber(2).build();
+		Student s3 = Student.builder().studentName("임연지").grade(1).classNumber(3).build();
+		Student s4 = Student.builder().studentName("이병도").grade(3).classNumber(3).build();
+		Student s5 = Student.builder().studentName("큐티장").grade(1).classNumber(3).build();
+
+		Club c1 = Club.builder().name("불량클럽").location("체육관").build();
+		Club c2 = Club.builder().name("등산").location("체육관").build();
+		Club c3 = Club.builder().name("코딩").location("정보화교육실").build();
+		
+//		s1.setClubs(List.of(c2,c3));
+//		s2.setClubs(List.of(c3));
+//		s3.setClubs(List.of(c1,c2,c3));
+//		s4.setClubs(List.of(c1));
+//		s5.setClubs(List.of(c2,c3));
+		
+		StudentClubs sc1 = StudentClubs.builder().student(s1).club(c1).enrollDate(new Date()).build();
+		StudentClubs sc2 = StudentClubs.builder().student(s1).club(c2).enrollDate(new Date()).build();
+		StudentClubs sc3 = StudentClubs.builder().student(s1).club(c3).enrollDate(new Date()).build();
+		StudentClubs sc4 = StudentClubs.builder().student(s2).club(c1).enrollDate(new Date()).build();
+		StudentClubs sc5 = StudentClubs.builder().student(s3).club(c1).enrollDate(new Date()).build();
+		
+		
+		em.persist(c1);
+		em.persist(c2);
+		em.persist(c3);
+		
+		em.persist(s1);
+		em.persist(s2);
+		em.persist(s3);
+		em.persist(s4);
+		em.persist(s5);
+		
+		em.persist(sc1);
+		em.persist(sc2);
+		em.persist(sc3);
+		em.persist(sc4);
+		em.persist(sc5);
+
+	}
+	
+	@Override
+	public Student selectStudent(EntityManager em, Long no) {
+		return em.find(Student.class, no);
+	}
+	
+	@Override
+	public Club selectClub(EntityManager em, Long no) {
+		return em.find(Club.class, no);
 	}
 
 }
