@@ -20,4 +20,6 @@ public interface JpaDao {
 	
 	List<JpaMember> selectMemberAll(EntityManager em);
 	
+	List<JpaMember> selectMemberSearch(EntityManager em, double height);
+	
 }

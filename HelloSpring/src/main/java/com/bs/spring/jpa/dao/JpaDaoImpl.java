@@ -51,4 +51,9 @@ public class JpaDaoImpl implements JpaDao {
 		return em.createQuery("select m from JpaMember m", JpaMember.class).getResultList();
 	}
 
+	@Override
+	public List<JpaMember> selectMemberSearch(EntityManager em, double height) {
+		return em.createQuery("select m from JpaMember m where height >= :param").setParameter("param", height).getResultList();
+	}
+
 }

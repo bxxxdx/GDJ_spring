@@ -70,8 +70,12 @@ public class JpaController {
 		return "redirect:/";
 	}
 	
-	
-	
+	@RequestMapping("/jpa/member/search")
+	public String selectMemberSearch(double height) {
+		List<JpaMember> list = service.selectMemberSearch(height);
+		list.stream().forEach(v->log.debug("조건검색 멤버들 : {}",v));
+		return "redirect:/";
+	}
 	
 	
 	
